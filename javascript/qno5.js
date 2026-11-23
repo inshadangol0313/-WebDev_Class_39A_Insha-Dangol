@@ -1,28 +1,33 @@
-// Qno 5Write a JavaScript program that takes a month number (1–12) and displays the corresponding season:
+const calculateBonus = (salary) => {
+    if (salary >= 40000) {
+        return salary * 10 / 100;
+    }
+    else {
+        return salary * 5 / 100;
+    }
+};
 
-// Winter: 12, 1, 2
-// Spring: 3, 4, 5
-// Summer: 6, 7, 8
-// Autumn: 9, 10, 11
+const calculateTax = (salary) => {
+    return salary * 5 / 100;
+};
 
-let month="12";
-switch(month){
-    case "1":console.log("Winter");break;
-    case "2":console.log("Winter");break;
-    case "12":console.log("Winter");break;
+const calculateNetSalary = (salary, bonusCallback, taxCallback) => {
+    let bonus = bonusCallback(salary);
+    let tax = taxCallback(salary);
 
-    case "3":console.log("Spring");break;
-    case "4":console.log("Spring");break;
-    case "5":console.log("Spring");break;
+    return salary + bonus - tax;
+};
 
-    case "6":console.log("Summer");break;
-    case "7":console.log("Summer");break;
-    case "8":console.log("Summer");break;
-    
-    case "9":console.log("Autumn");break;
-    case "10":console.log("Autumn");break;
-    case "11":console.log("Autumn");break;
-    
-    
-    default:("Invalid month");
-}
+const generatePayslip = (name, salary, callback) => {
+    let bonus = calculateBonus(salary);
+    let tax = calculateTax(salary);
+    let netSalary = callback(salary, calculateBonus, calculateTax);
+
+    console.log("Employee:", name);
+    console.log("Basic Salary: Rs.", salary);
+    console.log("Bonus: Rs.", bonus);
+    console.log("Tax: Rs.", tax);
+    console.log("Net Salary: Rs.", netSalary);
+};
+
+generatePayslip("Ram", 50000, calculateNetSalary);

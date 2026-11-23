@@ -1,10 +1,25 @@
-// Qno 1 Write a JavaScript program that takes a number and calculates:
-// Its square
-// Its cube
-// Display both results.
+const calculateBill = (units) => {
+    let bill = 0;
 
-let num=2;
-let square =num*num;
-let cube=num*num*num;
-console.log("Square of the given number =",square);
-console.log("Cube of the given number= ",cube);
+    if (units <= 20) {
+        bill = units * 5;
+    }
+    else if (units <= 50) {
+        bill = (20 * 5) + (units - 20) * 7;
+    }
+    else {
+        bill = (20 * 5) + (30 * 7) + (units - 50) * 10;
+    }
+
+    return bill + 50;
+};
+
+const displayBill = (name, units, callback) => {
+    let total = callback(units);
+
+    console.log("Customer:", name);
+    console.log("Units Consumed:", units);
+    console.log("Total Electricity Bill: Rs.", total);
+};
+
+displayBill("Ram", 65, calculateBill);

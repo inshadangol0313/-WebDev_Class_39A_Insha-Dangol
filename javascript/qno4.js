@@ -1,16 +1,42 @@
-// Qno 4 Write a JavaScript program that takes a traffic light color ("red", "yellow", or "green") and displays:
+const getTicketPrice = (age) => {
+    if (age < 12) {
+        return 150;
+    }
+    else if (age <= 17) {
+        return 200;
+    }
+    else if (age <= 59) {
+        return 300;
+    }
+    else {
+        return 200;
+    }
+};
 
-// "Stop" for red
-// "Get Ready" for yellow
-// "Go" for green
-// "Invalid color" for any other input
-// Use a switch statement.
+const calculateTotal = (price, quantity) => {
+    return price * quantity;
+};
 
-let trafficlightcolor="Green";
-switch(trafficlightcolor){
-    case "Red":console.log("Stop");break;
-    case "Yellow":console.log("Get Ready");break;
-    case "Green":console.log("GO");break;
-    
-    default:("Invalid color");
-}
+const applyDiscount = (total, quantity) => {
+    if (quantity >= 5) {
+        return total - (total * 10 / 100);
+    }
+    else {
+        return total;
+    }
+};
+
+const bookTicket = (name, age, quantity, callback) => {
+    let price = getTicketPrice(age);
+    let total = calculateTotal(price, quantity);
+    let finalAmount = callback(total, quantity);
+
+    console.log("Customer:", name);
+    console.log("Age:", age);
+    console.log("Tickets:", quantity);
+    console.log("Total Before Discount: Rs.", total);
+    console.log("Discount: Rs.", total - finalAmount);
+    console.log("Final Amount: Rs.", finalAmount);
+};
+
+bookTicket("Hari", 25, 5, applyDiscount);

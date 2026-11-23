@@ -1,23 +1,19 @@
-//Qno 2 Write a JavaScript program that takes the number of electricity units consumed and calculates the bill according to these rules:
+const calculateAverage = (m1, m2, m3) => (m1 + m2 + m3) / 3;
 
-// Up to 50 units → Rs. 5 per unit
-// 51–100 units → Rs. 7 per unit
-// 101–200 units → Rs. 10 per unit
-// Above 200 units → Rs. 12 per unit
-let units = 30;
-let bill;
+const getDivision = (average) => {
+  if (average >= 70) return "First Division";
+  if (average >= 60) return "Second Division";
+  if (average >= 50) return "Third Division";
+  return "Fail";
+};
 
-if (units <= 50) {
-    bill = units * 5;
-}
-else if (units <= 100) {
-    bill = units * 7;
-}
-else if (units <= 200) {
-    bill = units * 10;
-}
-else {
-    bill = units * 12;
-}
 
-console.log("Total bill = Rs. ",bill);
+const processResult = (name, m1, m2, m3, callback) => {
+  const average = callback(m1, m2, m3);
+  console.log(`Student: ${name}`);
+  console.log(`Average: ${average.toFixed(2)}`);
+  console.log(`Division: ${getDivision(average)}`);
+};
+
+
+processResult("Sita", 80, 75, 70, calculateAverage);
